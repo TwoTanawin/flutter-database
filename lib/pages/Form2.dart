@@ -1,9 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_database/main.dart';
 import 'package:flutter_database/models/Transaction.dart';
+import 'package:flutter_database/pages/homeScreen.dart';
 import 'package:flutter_database/providers/transactionProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_database/main.dart';
 
 // ignore: use_key_in_widget_constructors
 class Form2 extends StatefulWidget {
@@ -33,7 +36,7 @@ class _Form2State extends State<Form2> {
             children: [
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Task Name'),
-                autofocus: true,
+                autofocus: false,
                 controller: titleCoontroller,
                 validator: (String? str) {
                   if (str!.isEmpty) {
@@ -78,7 +81,14 @@ class _Form2State extends State<Form2> {
 
                     provider.addTransaction(statement);
 
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (context) {
+                              return MyHomePage(title: 'Accountant  APP');
+                            }));
                   }
                 },
               ),
