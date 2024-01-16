@@ -44,6 +44,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<TransactionProvider>(context, listen: false).initData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -51,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
           actions: [
             IconButton(
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.add),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return Form2();
@@ -65,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // Your UI components and logic here
             var count = provider.transactions.length;
             if (count <= 0) {
-              return Center(
+              return const Center(
                 child: Text(
                   "Data Not Found",
                   style: TextStyle(fontSize: 35),
@@ -75,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
               return ListView.builder(
                   itemCount: count,
                   itemBuilder: (context, int index) {
-                    Transaction data = provider.transactions[index];
+                    Transactions data = provider.transactions[index];
                     return Card(
                       elevation: 5,
                       margin: const EdgeInsets.symmetric(
